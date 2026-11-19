@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Canteen Dashboard | Desk2Dine</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         CANTEEN DASHBOARD CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/canteen/canteen-dashboard.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<nav class="navbar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        Desk<span>2Dine</span>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="nav-right">
+
+
+        <!-- CANTEEN NAME -->
+
+        <div class="canteen-name">
+
+            Welcome,
+
+            <span th:text="${canteen.name}">
+                MIT Canteen
+            </span>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <a th:href="@{/canteen/logout}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+
+    <ul>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <li>
+
+            <a th:href="@{/canteen/dashboard}"
+               class="active">
+
+                🏠 Dashboard
+
+            </a>
+
+        </li>
+
+
+
+        <!-- =================================================
+             INCOMING ORDERS
+        ================================================== -->
+
+        <li>
+
+            <a th:href="@{/canteen/incoming-orders}">
+
+                📥 Incoming Orders
+
+            </a>
+
+        </li>
+
+
+
+        <!-- =================================================
+             PREPARING
+        ================================================== -->
+
+        <li>
+
+            <a th:href="@{/canteen/preparing}">
+
+                👨‍🍳 Preparing
+
+            </a>
+
+        </li>
+
+
+
+        <!-- =================================================
+             READY
+        ================================================== -->
+
+        <li>
+
+            <a th:href="@{/canteen/ready}">
+
+                ✅ Ready
+
+            </a>
+
+        </li>
+
+
+
+        <!-- =================================================
+             DELIVERED
+        ================================================== -->
+
+        <li>
+
+            <a th:href="@{/canteen/delivered}">
+
+                🚚 Delivered
+
+            </a>
+
+        </li>
+
+
+
+        <!-- =================================================
+             LOGOUT
+        ================================================== -->
+
+        <li>
+
+            <a th:href="@{/canteen/logout}">
+
+                🚪 Logout
+
+            </a>
+
+        </li>
+
+
+    </ul>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         PAGE HEADING
+    ================================================== -->
+
+    <h1>
+
+        Canteen Dashboard
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Manage and monitor faculty food orders.
+
+    </p>
+
+
+
+    <!-- =================================================
+         STATISTICS CARDS
+    ================================================== -->
+
+    <div class="dashboard-cards">
+
+
+        <!-- =================================================
+             TOTAL ORDERS
+        ================================================== -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+
+                📦
+
+            </div>
+
+
+            <h3>
+
+                Total Orders
+
+            </h3>
+
+
+            <div class="number"
+                 th:text="${totalOrders}">
+
+                0
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PENDING ORDERS
+        ================================================== -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+
+                ⏳
+
+            </div>
+
+
+            <h3>
+
+                Pending
+
+            </h3>
+
+
+            <div class="number"
+                 th:text="${pendingOrders}">
+
+                0
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PREPARING ORDERS
+        ================================================== -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+
+                👨‍🍳
+
+            </div>
+
+
+            <h3>
+
+                Preparing
+
+            </h3>
+
+
+            <div class="number"
+                 th:text="${preparingOrders}">
+
+                0
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             READY ORDERS
+        ================================================== -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+
+                ✅
+
+            </div>
+
+
+            <h3>
+
+                Ready
+
+            </h3>
+
+
+            <div class="number"
+                 th:text="${readyOrders}">
+
+                0
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             DELIVERED ORDERS
+        ================================================== -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+
+                🚚
+
+            </div>
+
+
+            <h3>
+
+                Delivered
+
+            </h3>
+
+
+            <div class="number"
+                 th:text="${deliveredOrders}">
+
+                0
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+
+        <h2>
+
+            Quick Actions
+
+        </h2>
+
+
+
+        <div class="quick-actions">
+
+
+            <!-- =================================================
+                 INCOMING ORDERS
+            ================================================== -->
+
+            <a th:href="@{/canteen/incoming-orders}"
+               class="action-card">
+
+
+                <div class="icon">
+
+                    📥
+
+                </div>
+
+
+                <h3>
+
+                    Incoming Orders
+
+                </h3>
+
+
+                <p>
+
+                    View newly placed faculty orders.
+
+                </p>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 PREPARING ORDERS
+            ================================================== -->
+
+            <a th:href="@{/canteen/preparing}"
+               class="action-card">
+
+
+                <div class="icon">
+
+                    👨‍🍳
+
+                </div>
+
+
+                <h3>
+
+                    Preparing Orders
+
+                </h3>
+
+
+                <p>
+
+                    Manage orders currently being prepared.
+
+                </p>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 READY ORDERS
+            ================================================== -->
+
+            <a th:href="@{/canteen/ready}"
+               class="action-card">
+
+
+                <div class="icon">
+
+                    ✅
+
+                </div>
+
+
+                <h3>
+
+                    Ready Orders
+
+                </h3>
+
+
+                <p>
+
+                    View orders ready for delivery.
+
+                </p>
+
+
+            </a>
+
+
+
+            <!-- =================================================
+                 DELIVERED ORDERS
+            ================================================== -->
+
+            <a th:href="@{/canteen/delivered}"
+               class="action-card">
+
+
+                <div class="icon">
+
+                    🚚
+
+                </div>
+
+
+                <h3>
+
+                    Delivered Orders
+
+                </h3>
+
+
+                <p>
+
+                    View successfully delivered orders.
+
+                </p>
+
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RECENT ORDERS
+    ====================================================== -->
+
+    <section class="dashboard-section">
+
+
+        <h2>
+
+            Recent Orders
+
+        </h2>
+
+
+
+        <div class="table-container">
+
+
+            <table class="order-table">
+
+
+                <!-- =================================================
+                     TABLE HEADER
+                ================================================== -->
+
+                <thead>
+
+                <tr>
+
+
+                    <th>
+
+                        Order ID
+
+                    </th>
+
+
+                    <th>
+
+                        Faculty Email
+
+                    </th>
+
+
+                    <th>
+
+                        Food
+
+                    </th>
+
+
+                    <th>
+
+                        Quantity
+
+                    </th>
+
+
+                    <th>
+
+                        Price
+
+                    </th>
+
+
+                    <th>
+
+                        Total
+
+                    </th>
+
+
+                    <th>
+
+                        Status
+
+                    </th>
+
+
+                </tr>
+
+                </thead>
+
+
+
+                <!-- =================================================
+                     TABLE BODY
+                ================================================== -->
+
+                <tbody>
+
+
+                <!-- =================================================
+                     ORDER LIST
+                ================================================== -->
+
+                <tr th:each="order : ${orderList}">
+
+
+                    <!-- ORDER ID -->
+
+                    <td>
+
+                        #
+
+                        <span th:text="${order.orderId}">
+
+                            1
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- FACULTY EMAIL -->
+
+                    <td th:text="${order.facultyEmail}">
+
+                        faculty@gmail.com
+
+                    </td>
+
+
+
+                    <!-- FOOD NAME -->
+
+                    <td th:text="${order.foodName}">
+
+                        Burger
+
+                    </td>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <td th:text="${order.quantity}">
+
+                        1
+
+                    </td>
+
+
+
+                    <!-- PRICE -->
+
+                    <td>
+
+                        ₹
+
+                        <span th:text="${order.price}">
+
+                            80
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- TOTAL -->
+
+                    <td>
+
+                        ₹
+
+                        <span th:text="${order.total}">
+
+                            80
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+
+                        <span class="status"
+
+
+                              th:classappend="${
+
+                              order.status == 'Pending'
+
+                              ? ' pending'
+
+
+                              : order.status == 'Preparing'
+
+                              ? ' preparing'
+
+
+                              : order.status == 'Ready'
+
+                              ? ' ready'
+
+
+                              : order.status == 'Delivered'
+
+                              ? ' delivered'
+
+
+                              : order.status == 'Completed'
+
+                              ? ' completed'
+
+
+                              : ''
+
+                              }"
+
+
+                              th:text="${order.status}">
+
+                            Pending
+
+                        </span>
+
+
+                    </td>
+
+
+                </tr>
+
+
+
+                <!-- =================================================
+                     EMPTY ORDER STATE
+                ================================================== -->
+
+                <tr th:if="${#lists.isEmpty(orderList)}">
+
+
+                    <td colspan="7">
+
+
+                        <div class="empty-state">
+
+
+                            <div class="empty-icon">
+
+                                📦
+
+                            </div>
+
+
+                            <h3>
+
+                                No Orders Yet
+
+                            </h3>
+
+
+                            <p>
+
+                                New faculty orders will appear here.
+
+                            </p>
+
+
+                        </div>
+
+
+                    </td>
+
+
+                </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+</main>
+
+
+</body>
+
+</html>

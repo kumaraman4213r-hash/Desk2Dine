@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Dashboard | Desk2Dine</title>
+
+    <!-- Common CSS -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/sidebar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/responsive.css}">
+
+    <!-- Faculty CSS -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/faculty/faculty-dashboard.css}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        Desk<span>2Dine</span>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div class="user-name">
+
+            Welcome,
+
+            <span th:text="${faculty.name}">Faculty</span>
+
+        </div>
+
+        <a th:href="@{/faculty/logout}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <ul>
+
+        <li>
+
+            <a th:href="@{/faculty/dashboard}"
+               class="active">
+
+                🏠 Dashboard
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/menu}">
+
+                🍔 Menu
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/place-order}">
+
+                🛒 Place Order
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/my-orders}">
+
+                📦 My Orders
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/bills}">
+
+                💳 Bills
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/logout}">
+
+                🚪 Logout
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+    <h1>
+
+        Welcome,
+
+        <span th:text="${faculty.name}">Faculty</span>
+
+    </h1>
+
+    <p class="subtitle">
+
+        Faculty Canteen Order Management System
+
+    </p>
+
+    <div class="dashboard-grid">
+
+        <!-- MENU -->
+
+        <div class="card">
+
+            <div class="card-icon">
+
+                🍔
+
+            </div>
+
+            <h2>
+
+                Menu
+
+            </h2>
+
+            <p>
+
+                Browse today's delicious food menu.
+
+            </p>
+
+            <a th:href="@{/faculty/menu}"
+               class="primary-btn">
+
+                View Menu
+
+            </a>
+
+        </div>
+
+        <!-- PLACE ORDER -->
+
+        <div class="card">
+
+            <div class="card-icon">
+
+                🛒
+
+            </div>
+
+            <h2>
+
+                Place Order
+
+            </h2>
+
+            <p>
+
+                Order your favourite food quickly.
+
+            </p>
+
+            <a th:href="@{/faculty/place-order}"
+               class="primary-btn">
+
+                Order Now
+
+            </a>
+
+        </div>
+
+        <!-- MY ORDERS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+
+                📦
+
+            </div>
+
+            <h2>
+
+                My Orders
+
+            </h2>
+
+            <p>
+
+                Track all your placed food orders.
+
+            </p>
+
+            <a th:href="@{/faculty/my-orders}"
+               class="primary-btn">
+
+                View Orders
+
+            </a>
+
+        </div>
+
+        <!-- BILLS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+
+                💳
+
+            </div>
+
+            <h2>
+
+                Bills
+
+            </h2>
+
+            <p>
+
+                View your payment history and bills.
+
+            </p>
+
+            <a th:href="@{/faculty/bills}"
+               class="primary-btn">
+
+                View Bills
+
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

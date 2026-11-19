@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Menu | Desk2Dine</title>
+
+    <!-- Common CSS -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/sidebar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/responsive.css}">
+
+    <!-- Faculty CSS -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/faculty/faculty-menu.css}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        Desk<span>2Dine</span>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div class="user-name">
+
+            Welcome,
+
+            <span th:text="${faculty.name}">Faculty</span>
+
+        </div>
+
+        <a th:href="@{/faculty/logout}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <ul>
+
+        <li>
+
+            <a th:href="@{/faculty/dashboard}">
+
+                🏠 Dashboard
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/menu}"
+               class="active">
+
+                🍔 Menu
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/place-order}">
+
+                🛒 Place Order
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/my-orders}">
+
+                📦 My Orders
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/bills}">
+
+                💳 Bills
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/logout}">
+
+                🚪 Logout
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+    <h1>
+
+        Today's Menu
+
+    </h1>
+
+    <p class="subtitle">
+
+        Select your favourite food and place your order.
+
+    </p>
+
+    <div class="menu-container">
+            <div class="menu-card"
+             th:each="menu : ${menuList}">
+
+            <h2 th:text="${menu.foodName}">
+
+                Food Name
+
+            </h2>
+
+            <p>
+
+                <strong>Category :</strong>
+
+                <span th:text="${menu.category}">
+
+                    Category
+
+                </span>
+
+            </p>
+
+            <p>
+
+                <strong>Price :</strong>
+
+                <span class="price">
+
+                    ₹
+                    <span th:text="${menu.price}">
+
+                        0
+
+                    </span>
+
+                </span>
+
+            </p>
+
+            <p>
+
+                <strong>Description :</strong>
+
+            </p>
+
+            <p th:text="${menu.description}">
+
+                Food Description
+
+            </p>
+
+            <a th:href="@{/faculty/place-order(
+                    foodName=${menu.foodName},
+                    price=${menu.price})}"
+               class="primary-btn">
+
+                Order Now
+
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

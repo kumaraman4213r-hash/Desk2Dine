@@ -1,0 +1,189 @@
+/* ==========================================
+   FACULTY MY ORDERS PAGE
+========================================== */
+
+.main-content{
+
+    margin-left:240px;
+    margin-top:80px;
+
+    padding:40px;
+
+    min-height:100vh;
+
+    background:#121212;
+
+}
+
+/* ==========================================
+   Heading
+========================================== */
+
+.main-content h1{
+
+    color:#FFFFFF;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    color:#B3B3B3;
+
+    font-size:18px;
+
+    margin-bottom:35px;
+
+}
+
+/* ==========================================
+   Table
+========================================== */
+
+.order-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:#181818;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.order-table thead{
+
+    background:#1DB954;
+
+}
+
+.order-table th{
+
+    color:#FFFFFF;
+
+    padding:18px;
+
+    font-size:18px;
+
+    text-align:center;
+
+}
+
+/* ==========================================
+   Body
+========================================== */
+
+.order-table td{
+
+    color:#EAEAEA;
+
+    padding:18px;
+
+    text-align:center;
+
+    border-bottom:1px solid #2A2A2A;
+
+}
+
+.order-table tbody tr{
+
+    transition:.3s;
+
+}
+
+.order-table tbody tr:hover{
+
+    background:#202020;
+
+}
+
+/* ==========================================
+   Status
+========================================== */
+
+.status{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    background:#1DB954;
+
+    color:#FFFFFF;
+
+    border-radius:25px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:991px){
+
+    .main-content{
+
+        margin-left:0;
+
+        padding:25px;
+
+    }
+
+    .order-table{
+
+        display:block;
+
+        overflow-x:auto;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .main-content{
+
+        padding:20px;
+
+    }
+
+    .main-content h1{
+
+        font-size:32px;
+
+    }
+
+    .subtitle{
+
+        font-size:16px;
+
+    }
+
+    .order-table th,
+    .order-table td{
+
+        padding:14px;
+
+        font-size:14px;
+
+    }
+
+}

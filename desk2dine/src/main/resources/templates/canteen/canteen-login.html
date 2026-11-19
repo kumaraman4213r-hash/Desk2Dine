@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Canteen Login | Desk2Dine</title>
+
+    <link rel="stylesheet" th:href="@{/css/canteen/canteen-login.css}">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-box">
+
+        <div class="logo">
+
+            <h1>Desk2Dine</h1>
+
+            <p>Canteen Portal</p>
+
+        </div>
+
+        <form th:action="@{/canteen/login}" method="post">
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter Email"
+                        required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter Password"
+                        required>
+
+            </div>
+
+            <div class="error" th:if="${error}">
+
+                <p th:text="${error}"></p>
+
+            </div>
+
+            <button type="submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <div class="footer">
+
+            <a th:href="@{/}">
+
+                ← Back To Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

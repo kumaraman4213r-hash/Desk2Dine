@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Preparing Orders | Desk2Dine</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/canteen/canteen-dashboard.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        Desk<span>2Dine</span>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <div class="canteen-name">
+
+            Welcome,
+
+            <span th:text="${canteen.name}">
+                MIT Canteen
+            </span>
+
+        </div>
+
+
+        <a th:href="@{/canteen/logout}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <ul>
+
+        <!-- Dashboard -->
+
+        <li>
+
+            <a th:href="@{/canteen/dashboard}">
+
+                🏠 Dashboard
+
+            </a>
+
+        </li>
+
+
+        <!-- Incoming -->
+
+        <li>
+
+            <a th:href="@{/canteen/incoming-orders}">
+
+                📥 Incoming Orders
+
+            </a>
+
+        </li>
+
+
+        <!-- Preparing -->
+
+        <li>
+
+            <a th:href="@{/canteen/preparing}"
+               class="active">
+
+                👨‍🍳 Preparing
+
+            </a>
+
+        </li>
+
+
+        <!-- Ready -->
+
+        <li>
+
+            <a th:href="@{/canteen/ready}">
+
+                ✅ Ready
+
+            </a>
+
+        </li>
+
+
+        <!-- Delivered -->
+
+        <li>
+
+            <a th:href="@{/canteen/delivered}">
+
+                🚚 Delivered
+
+            </a>
+
+        </li>
+
+
+        <!-- Logout -->
+
+        <li>
+
+            <a th:href="@{/canteen/logout}">
+
+                🚪 Logout
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- PAGE HEADER -->
+
+    <h1>
+
+        Preparing Orders
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Manage food orders currently being prepared.
+
+    </p>
+
+
+
+    <!-- =================================================
+         PREPARING ORDERS
+    ================================================== -->
+
+    <section class="dashboard-section">
+
+
+        <h2>
+
+            Orders Being Prepared
+
+        </h2>
+
+
+        <div class="table-container">
+
+
+            <table class="order-table">
+
+
+                <!-- TABLE HEADER -->
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        Order ID
+                    </th>
+
+                    <th>
+                        Faculty Email
+                    </th>
+
+                    <th>
+                        Food
+                    </th>
+
+                    <th>
+                        Quantity
+                    </th>
+
+                    <th>
+                        Price
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+
+                <!-- TABLE BODY -->
+
+                <tbody>
+
+
+                <!-- =================================================
+                     ORDER ROW
+                ================================================== -->
+
+                <tr th:each="order : ${orderList}">
+
+
+                    <!-- ORDER ID -->
+
+                    <td>
+
+                        #
+
+                        <span th:text="${order.orderId}">
+                            1
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- FACULTY EMAIL -->
+
+                    <td th:text="${order.facultyEmail}">
+
+                        faculty@gmail.com
+
+                    </td>
+
+
+
+                    <!-- FOOD -->
+
+                    <td th:text="${order.foodName}">
+
+                        Burger
+
+                    </td>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <td th:text="${order.quantity}">
+
+                        1
+
+                    </td>
+
+
+
+                    <!-- PRICE -->
+
+                    <td>
+
+                        ₹
+
+                        <span th:text="${order.price}">
+
+                            80
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- TOTAL -->
+
+                    <td>
+
+                        ₹
+
+                        <span th:text="${order.total}">
+
+                            80
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        <span class="status preparing">
+
+                            Preparing
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- ACTION -->
+
+                    <td>
+
+                        <form th:action="@{/canteen/update-status}"
+                              method="post">
+
+
+                            <input type="hidden"
+                                   name="orderId"
+                                   th:value="${order.orderId}">
+
+
+                            <input type="hidden"
+                                   name="status"
+                                   value="Ready">
+
+
+                            <button type="submit"
+                                    class="primary-btn">
+
+                                Mark Ready
+
+                            </button>
+
+
+                        </form>
+
+                    </td>
+
+
+                </tr>
+
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                ================================================== -->
+
+                <tr th:if="${#lists.isEmpty(orderList)}">
+
+
+                    <td colspan="8">
+
+
+                        <div class="empty-state">
+
+
+                            <div class="empty-icon">
+
+                                👨‍🍳
+
+                            </div>
+
+
+                            <h3>
+
+                                No Preparing Orders
+
+                            </h3>
+
+
+                            <p>
+
+                                Accepted orders will appear here
+                                while they are being prepared.
+
+                            </p>
+
+
+                        </div>
+
+
+                    </td>
+
+
+                </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

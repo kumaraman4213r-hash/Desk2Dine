@@ -1,0 +1,218 @@
+/* ==========================================
+   FACULTY ORDER PAGE
+========================================== */
+
+.main-content{
+
+    margin-left:240px;
+    margin-top:90px;
+
+    padding:50px;
+
+    min-height:100vh;
+
+    background:#121212;
+
+}
+
+/* ==========================================
+   Heading
+========================================== */
+
+.main-content h1{
+
+    color:#FFFFFF;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    color:#B3B3B3;
+
+    font-size:18px;
+
+    margin-bottom:35px;
+
+}
+
+/* ==========================================
+   Form
+========================================== */
+
+form{
+
+    max-width:700px;
+
+    background:#181818;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    border:1px solid #2A2A2A;
+
+    transition:.3s;
+
+}
+
+form:hover{
+
+    border-color:#1DB954;
+
+    box-shadow:0 15px 35px rgba(29,185,84,.25);
+
+}
+
+/* ==========================================
+   Form Group
+========================================== */
+
+.form-group{
+
+    margin-bottom:25px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    color:#FFFFFF;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.form-group input{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    border:1px solid #333333;
+
+    background:#242424;
+
+    color:#FFFFFF;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.form-group input:focus{
+
+    border-color:#1DB954;
+
+    box-shadow:0 0 8px rgba(29,185,84,.35);
+
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+.primary-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#1DB954;
+
+    color:#FFFFFF;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.primary-btn:hover{
+
+    background:#1ED760;
+
+    transform:scale(1.02);
+
+    box-shadow:0 10px 25px rgba(29,185,84,.35);
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:991px){
+
+    .main-content{
+
+        margin-left:0;
+
+        padding:25px;
+
+    }
+
+    form{
+
+        padding:25px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .main-content{
+
+        padding:20px;
+
+    }
+
+    .main-content h1{
+
+        font-size:32px;
+
+    }
+
+    .subtitle{
+
+        font-size:16px;
+
+    }
+
+    .form-group input{
+
+        font-size:15px;
+
+    }
+
+    .primary-btn{
+
+        font-size:16px;
+
+    }
+
+}

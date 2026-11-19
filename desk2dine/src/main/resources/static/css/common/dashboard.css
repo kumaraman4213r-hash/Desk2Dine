@@ -1,0 +1,178 @@
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+.main-content{
+
+    margin-left:240px;
+    margin-top:75px;
+
+    padding:40px;
+
+    min-height:100vh;
+
+    background:#121212;
+
+}
+
+.main-content h1{
+
+    color:#ffffff;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    color:#B3B3B3;
+
+    font-size:18px;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+   DASHBOARD GRID
+=========================== */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.card{
+
+    background:#181818;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    transition:0.35s;
+
+    border:1px solid #282828;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    background:#202020;
+
+    border-color:#1DB954;
+
+    box-shadow:0 15px 35px rgba(29,185,84,.25);
+
+}
+
+/* ===========================
+   ICON
+=========================== */
+
+.card-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:#1DB954;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:32px;
+
+    margin-bottom:25px;
+
+}
+
+/* ===========================
+   TITLE
+=========================== */
+
+.card h2{
+
+    color:#ffffff;
+
+    margin-bottom:12px;
+
+    font-size:24px;
+
+}
+
+.card p{
+
+    color:#B3B3B3;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.primary-btn{
+
+    display:inline-block;
+
+    background:#1DB954;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.primary-btn:hover{
+
+    background:#1ED760;
+
+    transform:scale(1.05);
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+    .main-content{
+
+        margin-left:0;
+
+        padding:25px;
+
+    }
+
+}

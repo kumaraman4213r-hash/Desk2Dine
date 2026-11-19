@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Bills | Desk2Dine</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background: #121212;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+
+            background: #000000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            border-bottom: 1px solid #282828;
+
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 700;
+            color: #1db954;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .welcome {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            text-decoration: none;
+            background: #1db954;
+            color: #ffffff;
+
+            padding: 12px 25px;
+
+            border-radius: 25px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+
+            top: 80px;
+            left: 0;
+            bottom: 0;
+
+            width: 310px;
+
+            background: #000000;
+
+            border-right: 1px solid #282828;
+
+            padding: 45px 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+
+            padding: 15px 25px;
+
+            color: #b3b3b3;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #ffffff;
+            background: #181818;
+        }
+
+        .sidebar a.active {
+            background: #1db954;
+            color: #ffffff;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main-content {
+            margin-left: 310px;
+
+            padding: 125px 50px 60px;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(29, 185, 84, 0.08),
+                    transparent 35%
+                ),
+                #121212;
+        }
+
+        .main-content h1 {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #b3b3b3;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+
+        /* ================= BILL SECTION ================= */
+
+        .bill-section {
+            background: #181818;
+
+            border: 1px solid #292929;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            overflow: hidden;
+        }
+
+        .bill-section h2 {
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .bill-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        .bill-table th {
+            text-align: left;
+
+            padding: 18px;
+
+            background: #242424;
+
+            color: #b3b3b3;
+
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            border-bottom: 1px solid #333333;
+        }
+
+        .bill-table td {
+            padding: 19px 18px;
+
+            color: #ffffff;
+
+            border-bottom: 1px solid #282828;
+
+            font-size: 15px;
+        }
+
+        .bill-table tr:hover td {
+            background: #202020;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .status.delivered {
+            color: #ce93d8;
+
+            background: rgba(156, 39, 176, 0.12);
+
+            border: 1px solid rgba(156, 39, 176, 0.25);
+        }
+
+        .status.pending {
+            color: #ffc107;
+
+            background: rgba(255, 193, 7, 0.12);
+        }
+
+        .status.preparing {
+            color: #2196f3;
+
+            background: rgba(33, 150, 243, 0.12);
+        }
+
+        .status.ready {
+            color: #1db954;
+
+            background: rgba(29, 185, 84, 0.12);
+        }
+
+
+        /* ================= TOTAL ================= */
+
+        .total-row td {
+            border-top: 1px solid #333333;
+
+            border-bottom: none;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+        .grand-total {
+            color: #1db954;
+
+            font-size: 22px;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty-state {
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: #b3b3b3;
+        }
+
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 80px;
+                padding: 30px 10px;
+            }
+
+            .sidebar a {
+                font-size: 0;
+                text-align: center;
+                padding: 15px 5px;
+            }
+
+            .main-content {
+                margin-left: 80px;
+                padding: 110px 25px 40px;
+            }
+
+            .main-content h1 {
+                font-size: 36px;
+            }
+
+            .welcome {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .main-content {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .bill-section {
+                padding: 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Desk<span>2Dine</span>
+    </div>
+
+    <div class="nav-right">
+
+        <div class="welcome">
+
+            Welcome,
+
+            <span th:text="${faculty.name}">
+                Aman
+            </span>
+
+        </div>
+
+        <a th:href="@{/faculty/logout}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <ul>
+
+        <li>
+            <a th:href="@{/faculty/dashboard}">
+                🏠 Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/faculty/menu}">
+                🍔 Menu
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/faculty/place-order}">
+                🛒 Place Order
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/faculty/my-orders}">
+                📦 My Orders
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/faculty/bills}"
+               class="active">
+                💳 Bills
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/faculty/logout}">
+                🚪 Logout
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main-content">
+
+    <h1>
+        My Bills
+    </h1>
+
+    <p class="subtitle">
+        View your food orders and billing details.
+    </p>
+
+
+    <section class="bill-section">
+
+        <h2>
+            Order Billing
+        </h2>
+
+
+        <div class="table-container">
+
+            <table class="bill-table">
+
+                <thead>
+
+                <tr>
+
+                    <th>Order ID</th>
+
+                    <th>Food Name</th>
+
+                    <th>Quantity</th>
+
+                    <th>Price</th>
+
+                    <th>Total</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                <tr th:each="order : ${orderList}">
+
+                    <td>
+
+                        #
+
+                        <span th:text="${order.orderId}">
+                            13
+                        </span>
+
+                    </td>
+
+                    <td th:text="${order.foodName}">
+                        Burger
+                    </td>
+
+                    <td th:text="${order.quantity}">
+                        2
+                    </td>
+
+                    <td>
+
+                        ₹
+
+                        <span th:text="${order.price}">
+                            80.0
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        ₹
+
+                        <span th:text="${order.total}">
+                            160.0
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="status"
+                              th:classappend="${#strings.toLowerCase(order.status)}"
+                              th:text="${order.status}">
+
+                            Delivered
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- EMPTY -->
+
+                <tr th:if="${#lists.isEmpty(orderList)}">
+
+                    <td colspan="6">
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                💳
+                            </div>
+
+                            <h3>
+                                No Bills Available
+                            </h3>
+
+                            <p>
+                                Your orders and bills will appear here.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- TOTAL -->
+
+                <tr th:if="${!#lists.isEmpty(orderList)}"
+                    class="total-row">
+
+                    <td colspan="4">
+                        Grand Total
+                    </td>
+
+                    <td class="grand-total">
+
+                        ₹
+
+                        <span
+                            th:text="${#aggregates.sum(orderList.![total])}">
+                            0.0
+                        </span>
+
+                    </td>
+
+                    <td></td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Place Order | Desk2Dine</title>
+
+    <!-- ================= COMMON CSS ================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/sidebar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/responsive.css}">
+
+    <!-- ================= FACULTY CSS ================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/faculty/faculty-place-order.css}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        Desk<span>2Dine</span>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div class="user-name">
+
+            Welcome,
+
+            <span th:text="${faculty.name}">Faculty</span>
+
+        </div>
+
+        <a th:href="@{/faculty/logout}"
+           class="logout-btn">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <ul>
+
+        <li>
+
+            <a th:href="@{/faculty/dashboard}">
+
+                🏠 Dashboard
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/menu}">
+
+                🍔 Menu
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/place-order}"
+               class="active">
+
+                🛒 Place Order
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/my-orders}">
+
+                📦 My Orders
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/bills}">
+
+                💳 Bills
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/faculty/logout}">
+
+                🚪 Logout
+
+            </a>
+
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+    <h1>
+
+        Place Order
+
+    </h1>
+
+    <p class="subtitle">
+
+        Complete the order details below.
+
+    </p>
+
+    <form th:action="@{/faculty/place-order}"
+          method="post">
+          
+                 <div class="form-group">
+
+            <label>
+
+                Faculty Email
+
+            </label>
+
+            <input
+                    type="email"
+                    name="facultyEmail"
+                    th:value="${faculty.email}"
+                    readonly>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Food Name
+
+            </label>
+
+            <input
+                    type="text"
+                    id="foodName"
+                    name="foodName"
+                    th:value="${order.foodName}"
+                    readonly>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Price
+
+            </label>
+
+            <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    th:value="${order.price}"
+                    readonly>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Quantity
+
+            </label>
+
+            <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    onchange="calculateTotal()"
+                    onkeyup="calculateTotal()"
+                    required>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Total
+
+            </label>
+
+            <input
+                    type="number"
+                    id="total"
+                    name="total"
+                    readonly>
+
+        </div>
+
+        <!-- ================= SUCCESS MESSAGE ================= -->
+
+        <p class="success-message"
+           th:if="${success}"
+           th:text="${success}"></p>
+
+        <!-- ================= ERROR MESSAGE ================= -->
+
+        <p class="error-message"
+           th:if="${error}"
+           th:text="${error}"></p>
+
+        <button
+                type="submit"
+                class="primary-btn">
+
+            Place Order
+
+        </button>
+
+    </form>
+
+</main>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    function calculateTotal() {
+
+        let price =
+            parseFloat(document.getElementById("price").value) || 0;
+
+        let quantity =
+            parseInt(document.getElementById("quantity").value) || 1;
+
+        document.getElementById("total").value = price * quantity;
+
+    }
+
+    window.onload = function () {
+
+        calculateTotal();
+
+    };
+
+</script>
+
+</body>
+
+</html>
